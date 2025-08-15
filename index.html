@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Electronics Ecommerce</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>TechStore</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#todo">Tasks</a></li>
+                <li><a href="#weather">Weather</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to TechStore</h1>
+            <p>Your one-stop destination for the latest electronics</p>
+            <button class="cta-button" onclick="showAlert()">Shop Now</button>
+        </div>
+    </section>
+
+    <!-- Products Section with Filtering -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2>Our Products</h2>
+            
+            <!-- Filter Options -->
+            <div class="filter-container">
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="all">All Categories</option>
+                    <option value="smartphones">Smartphones</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under $500</option>
+                    <option value="medium">$500 - $1500</option>
+                    <option value="high">Above $1500</option>
+                </select>
+                <select id="ratingFilter" onchange="filterProducts()">
+                    <option value="all">All Ratings</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                </select>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2>Product Gallery</h2>
+            <div class="gallery-controls">
+                <input type="text" id="imageUrl" placeholder="Enter image URL">
+                <input type="text" id="imageTitle" placeholder="Enter image title">
+                <button onclick="addImage()">Add Image</button>
+            </div>
+            <div class="image-gallery" id="imageGallery">
+                <!-- Images will be added dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2>Electronics Knowledge Quiz</h2>
+            <div class="quiz-container" id="quizContainer">
+                <div class="question-container">
+                    <h3 id="questionText">Click Start Quiz to begin!</h3>
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Quiz options will be populated here -->
+                    </div>
+                    <div class="quiz-controls">
+                        <button id="startQuiz" onclick="startQuiz()">Start Quiz</button>
+                        <button id="nextQuestion" onclick="nextQuestion()" style="display: none;">Next Question</button>
+                    </div>
+                    <div class="quiz-results" id="quizResults" style="display: none;">
+                        <h3>Quiz Complete!</h3>
+                        <p id="scoreText"></p>
+                        <button onclick="restartQuiz()">Restart Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Todo List Section -->
+    <section id="todo" class="todo-section">
+        <div class="container">
+            <h2>Task Manager</h2>
+            <div class="todo-container">
+                <div class="todo-input">
+                    <input type="text" id="todoInput" placeholder="Add a new task..." onkeypress="handleTodoKeyPress(event)">
+                    <button onclick="addTodo()">Add Task</button>
+                </div>
+                <ul class="todo-list" id="todoList">
+                    <!-- Todo items will be added here -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weather Section -->
+    <section id="weather" class="weather-section">
+        <div class="container">
+            <h2>Weather Information</h2>
+            <div class="weather-container">
+                <div class="weather-input">
+                    <input type="text" id="cityInput" placeholder="Enter city name" onkeypress="handleWeatherKeyPress(event)">
+                    <button onclick="getWeather()">Get Weather</button>
+                </div>
+                <div class="weather-display" id="weatherDisplay">
+                    <p>Enter a city name to get weather information</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form" id="contactForm" onsubmit="submitForm(event)" novalidate>
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <span class="error-message" id="nameError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone">
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <span class="error-message" id="messageError"></span>
+                </div>
+                
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 TechStore. All rights reserved.</p>
+            <p>Built with HTML, CSS, and JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
